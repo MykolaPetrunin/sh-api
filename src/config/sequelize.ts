@@ -9,12 +9,6 @@ if (!PGUSER || !PGPASSWORD || !PGDATABASE || !PGHOST || !PGPORT || !NODE_ENV) {
 export const sequelize = new Sequelize(PGDATABASE, PGUSER, PGPASSWORD, {
   host: PGHOST,
   port: Number(PGPORT),
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false,
-    },
-  },
   dialect: 'postgres',
   logging: false,
 });
