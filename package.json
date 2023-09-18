@@ -2,10 +2,13 @@
   "name": "newapp-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "nodemon --inspect",
+    "build": "tsc",
+    "heroku-postbuild": "tsc",
     "start": "ts-node -r dotenv/config ./src/index.ts",
+    "start:prod": "node -r dotenv/config dist/index.js",
     "lint": "eslint '*/**/*.{js,ts}' --quiet --fix",
     "prettier-format": "prettier --write 'src/**/*.ts'",
     "prettier-check": "prettier --check 'src/**/*.ts'",
@@ -13,7 +16,6 @@
     "migrate:undo": "ts-node node_modules/.bin/node-pg-migrate down",
     "test": "jest"
   },
-  "keywords": [],
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -25,6 +27,7 @@
     "*.md": ["prettier --write"],
     "*.json": ["prettier --write"]
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
