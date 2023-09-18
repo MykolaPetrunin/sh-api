@@ -1,5 +1,11 @@
 import { Options } from 'swagger-jsdoc';
 
+const { APP_URL } = process.env;
+
+if (!APP_URL) {
+  throw new Error('Application url configuration variable is missing');
+}
+
 const swaggerOptions: Options = {
   definition: {
     openapi: '3.0.0',
@@ -10,7 +16,7 @@ const swaggerOptions: Options = {
     },
     servers: [
       {
-        url: 'http://localhost:3000',
+        url: APP_URL,
       },
     ],
     components: {
