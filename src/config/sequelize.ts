@@ -1,9 +1,9 @@
 import { Sequelize } from 'sequelize';
 import 'dotenv/config';
 
-const { PGUSER, PGPASSWORD, PGDATABASE, PGHOST, PGPORT, ENV } = process.env;
+const { PGUSER, PGPASSWORD, PGDATABASE, PGHOST, PGPORT, NODE_ENV } = process.env;
 
-if (!PGUSER || !PGPASSWORD || !PGDATABASE || !PGHOST || !PGPORT || !ENV) {
+if (!PGUSER || !PGPASSWORD || !PGDATABASE || !PGHOST || !PGPORT || !NODE_ENV) {
   throw new Error('Database configuration variables are missing');
 }
 export const sequelize = new Sequelize(PGDATABASE, PGUSER, PGPASSWORD, {
@@ -12,7 +12,7 @@ export const sequelize = new Sequelize(PGDATABASE, PGUSER, PGPASSWORD, {
   dialectOptions: {
     ssl: {
       require: true,
-      rejectUnauthorized: ENV === 'prod',
+      rejectUnauthorized: NODE_ENV === 'staging',
     },
   },
   dialect: 'postgres',
