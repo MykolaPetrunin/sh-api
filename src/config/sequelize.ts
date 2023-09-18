@@ -12,7 +12,7 @@ export const sequelize = new Sequelize(PGDATABASE, PGUSER, PGPASSWORD, {
   dialectOptions: {
     ssl: {
       require: true,
-      rejectUnauthorized: NODE_ENV === 'production',
+      rejectUnauthorized: false,
     },
   },
   dialect: 'postgres',
