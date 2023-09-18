@@ -1,0 +1,20 @@
+# Node specific
+node_modules/
+npm-debug.log
+
+# Environment variables
+.env
+
+# IDE - WebStorm
+.idea/
+
+# Build directory
+/dist
+
+# Log files
+*.log
+
+# Other files and directories to ignore
+.DS_Store
+*.swp
+*.swo
