@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon --inspect",
     "build": "tsc",
-    "heroku-postbuild": "npm run build && ts-node node_modules/.bin/node-pg-migrate up",
+    "heroku-postbuild": "npm run build",
     "start": "node -r dotenv/config dist/index.js",
     "lint": "eslint '*/**/*.{js,ts}' --quiet --fix",
     "prettier-format": "prettier --write 'src/**/*.ts'",
