@@ -34,7 +34,6 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
       type: 'text',
       notNull: false,
     },
-    // додаткові поля для інформації про систему можна додати тут
   });
 }
 
