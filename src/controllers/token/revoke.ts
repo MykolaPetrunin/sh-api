@@ -40,7 +40,7 @@ router.post('/', authenticateJWT, async (req: AuthRequest, res: Response) => {
     const result = await Token.destroy({
       where: {
         token: tokenToRevoke,
-        userId: userId,
+        user_id: userId,
       },
     });
 

@@ -24,17 +24,22 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
       notNull: true,
       unique: true,
     },
-    createdAt: {
+    created_at: {
       type: 'timestamp',
       notNull: true,
       default: pgm.func('current_timestamp'),
     },
-    updatedAt: {
+    updated_at: {
       type: 'timestamp',
       notNull: true,
       default: pgm.func('current_timestamp'),
     },
   });
+
+  pgm.sql(`
+    INSERT INTO users (id, username, password, email)
+    VALUES ('489ed895-fb78-47f5-87e3-764f6137b379', 'SugarHunter', 'password', 'mykola.petrunin@gmail.com');
+  `);
 }
 
 export async function down(pgm: MigrationBuilder): Promise<void> {

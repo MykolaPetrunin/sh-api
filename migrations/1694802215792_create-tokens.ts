@@ -9,7 +9,7 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
       primaryKey: true,
       default: pgm.func('uuid_generate_v4()'),
     },
-    userId: {
+    user_id: {
       type: 'uuid',
       notNull: true,
       references: 'users(id)',
@@ -20,17 +20,17 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
       notNull: true,
       unique: true,
     },
-    createdAt: {
+    created_at: {
       type: 'timestamp',
       notNull: true,
       default: pgm.func('current_timestamp'),
     },
-    updatedAt: {
+    updated_at: {
       type: 'timestamp',
       notNull: true,
       default: pgm.func('current_timestamp'),
     },
-    userAgent: {
+    user_agent: {
       type: 'text',
       notNull: false,
     },

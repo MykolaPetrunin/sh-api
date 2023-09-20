@@ -6,8 +6,8 @@ export interface UserAttributes {
   username: string;
   password: string;
   email: string;
-  readonly createdAt?: Date;
-  readonly updatedAt?: Date;
+  readonly created_at?: Date;
+  readonly updated_at?: Date;
 }
 
 export interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
@@ -17,8 +17,8 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
   public username!: string;
   public password!: string;
   public email!: string;
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+  public readonly created_at!: Date;
+  public readonly updated_at!: Date;
 }
 
 User.init(
@@ -44,6 +44,8 @@ User.init(
   {
     tableName: 'users',
     sequelize,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
   },
 );
 

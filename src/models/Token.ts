@@ -4,22 +4,22 @@ import User from './User';
 
 export interface TokenAttributes {
   id: string;
-  userId: string;
+  user_id: string;
   token: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-  userAgent?: string;
+  created_at?: Date;
+  updated_at?: Date;
+  user_agent?: string;
 }
 
 export interface TokenCreationAttributes extends Optional<TokenAttributes, 'id'> {}
 
 class Token extends Model<TokenAttributes, TokenCreationAttributes> implements TokenAttributes {
   public id!: string;
-  public userId!: string;
+  public user_id!: string;
   public token!: string;
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
-  public userAgent!: string;
+  public readonly created_at!: Date;
+  public readonly updated_at!: Date;
+  public user_agent!: string;
 }
 
 Token.init(
@@ -29,7 +29,7 @@ Token.init(
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    userId: {
+    user_id: {
       type: DataTypes.UUID,
       references: {
         model: User,
@@ -41,7 +41,7 @@ Token.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    userAgent: {
+    user_agent: {
       type: DataTypes.STRING,
       allowNull: true,
     },
@@ -49,6 +49,8 @@ Token.init(
   {
     sequelize,
     tableName: 'tokens',
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
   },
 );
 

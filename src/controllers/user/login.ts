@@ -69,9 +69,9 @@ router.post(
       const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET || 'your-secret-key');
 
       await Token.create({
-        userId: user.get('id'),
+        user_id: user.get('id'),
         token,
-        userAgent,
+        user_agent: userAgent,
       });
 
       res.json({ token });

@@ -39,12 +39,12 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
       type: 'text',
       notNull: false,
     },
-    createdAt: {
+    created_at: {
       type: 'timestamp',
       notNull: true,
       default: pgm.func('current_timestamp'),
     },
-    updatedAt: {
+    updated_at: {
       type: 'timestamp',
       notNull: true,
       default: pgm.func('current_timestamp'),

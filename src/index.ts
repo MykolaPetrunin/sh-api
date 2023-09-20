@@ -7,6 +7,7 @@ import { sequelize } from './config/sequelize';
 import swaggerOptions from './config/swaggerOptions';
 import userRoutes from './controllers/user';
 import tokenRoutes from './controllers/token';
+import productsRoutes from './controllers/products';
 import { logger } from './config/logger';
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
@@ -44,9 +45,11 @@ sequelize
       res.send('Hello World!');
     });
 
-    app.use('/api/users', userRoutes);
+    app.use('/api/products', productsRoutes);
 
     app.use('/api/token', tokenRoutes);
+
+    app.use('/api/users', userRoutes);
 
     app.listen(port, () => {
       logger.info(`Server running on http://localhost:${port}/`); // Використовуємо логгер замість console.log

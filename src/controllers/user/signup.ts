@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { check, validationResult } from 'express-validator';
 import User from '../../models/User';
+import { logger } from '../../config/logger';
 
 const router = express.Router();
 
@@ -70,6 +71,7 @@ router.post(
         },
       });
     } catch (error) {
+      logger.error(JSON.stringify(error));
       res.status(500).json({ error: 'Failed to create user' });
     }
   },
