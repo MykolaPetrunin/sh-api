@@ -1,5 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../config/sequelize';
+import RecipeProduct from './RecipeProduct';
 
 const caloriesInFat = 9;
 const caloriesInCarbohydrates = 4;
@@ -17,6 +18,8 @@ class Product extends Model {
   public calories?: number;
   public readonly created_at!: Date;
   public readonly updated_at!: Date;
+
+  RecipeProduct?: RecipeProduct;
 
   calculateCalories() {
     const { fats, carbohydrates, proteins } = this.get();

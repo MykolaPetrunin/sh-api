@@ -1,6 +1,4 @@
-import { MigrationBuilder, ColumnDefinitions } from 'node-pg-migrate';
-
-export const shorthands: ColumnDefinitions | undefined = undefined;
+import { MigrationBuilder } from 'node-pg-migrate';
 
 export async function up(pgm: MigrationBuilder): Promise<void> {
   pgm.createExtension('uuid-ossp', { ifNotExists: true });

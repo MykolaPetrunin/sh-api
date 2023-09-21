@@ -5,10 +5,12 @@ import swaggerUi from 'swagger-ui-express';
 import 'dotenv/config';
 import { sequelize } from './config/sequelize';
 import swaggerOptions from './config/swaggerOptions';
-import userRoutes from './controllers/user';
-import tokenRoutes from './controllers/token';
-import productsRoutes from './controllers/products';
 import { logger } from './config/logger';
+import userRoutes from './routes/userRoutes';
+import tokenRoutes from './routes/tokenRoutes';
+import productRoutes from './routes/productRoutes';
+import recipeRoutes from './routes/recipeRoutes';
+import './models/associations';
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
@@ -45,11 +47,13 @@ sequelize
       res.send('Hello World!');
     });
 
-    app.use('/api/products', productsRoutes);
+    app.use('/api/users', userRoutes);
 
     app.use('/api/token', tokenRoutes);
 
-    app.use('/api/users', userRoutes);
+    app.use('/api/products', productRoutes);
+
+    app.use('/api/recipes', recipeRoutes);
 
     app.listen(port, () => {
       logger.info(`Server running on http://localhost:${port}/`); // Використовуємо логгер замість console.log
