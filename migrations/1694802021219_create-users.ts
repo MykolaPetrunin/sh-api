@@ -22,6 +22,11 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
       notNull: true,
       unique: true,
     },
+    is_email_verified: {
+      type: 'boolean',
+      notNull: true,
+      default: false,
+    },
     created_at: {
       type: 'timestamp',
       notNull: true,

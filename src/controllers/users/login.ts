@@ -20,6 +20,10 @@ export const login = async (req: Request, res: Response) => {
       return res.status(404).send('User not found');
     }
 
+    if (!user.get('is_email_verified')) {
+      return res.status(403).send('Email not verified');
+    }
+
     const dbPassword = user.get('password');
     const isPasswordValid = await bcrypt.compare(password, dbPassword);
 

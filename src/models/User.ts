@@ -6,6 +6,7 @@ export interface UserAttributes {
   username: string;
   password: string;
   email: string;
+  is_email_verified: boolean;
   readonly created_at?: Date;
   readonly updated_at?: Date;
 }
@@ -17,6 +18,7 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
   public username!: string;
   public password!: string;
   public email!: string;
+  public is_email_verified!: boolean;
   public readonly created_at!: Date;
   public readonly updated_at!: Date;
 }
@@ -39,6 +41,11 @@ User.init(
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    is_email_verified: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
   },
   {

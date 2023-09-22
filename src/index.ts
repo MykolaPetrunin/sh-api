@@ -11,6 +11,8 @@ import tokenRoutes from './routes/tokenRoutes';
 import productRoutes from './routes/productRoutes';
 import recipeRoutes from './routes/recipeRoutes';
 import './models/associations';
+import { removeExpiredTokens } from './cronJobs/removeExpiredTokens';
+import cron from 'node-cron';
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
@@ -62,3 +64,5 @@ sequelize
   .catch((error) => {
     logger.error(`Error syncing database: ${error}`); // Використовуємо логгер замість console.error
   });
+
+cron.schedule('0 0 * * *', removeExpiredTokens);

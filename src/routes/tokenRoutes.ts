@@ -1,6 +1,8 @@
 import express from 'express';
 import { authenticateJWT } from '../middlewares/authenticateJWT';
 import { revokeToken } from '../controllers/tokens/revokeToken';
+import { body } from 'express-validator';
+import { validationErrors } from '../middlewares/validationErrors';
 
 const router = express.Router();
 
@@ -24,6 +26,7 @@ const router = express.Router();
  *             properties:
  *               tokenToRevoke:
  *                 type: string
+ *                 description: Token is required.
  *     responses:
  *       200:
  *         description: Token revoked
@@ -32,6 +35,6 @@ const router = express.Router();
  *       401:
  *         description: Unauthorized
  */
-router.post('/revoke', authenticateJWT, revokeToken);
+router.post('/revoke', authenticateJWT, [body('tokenToRevoke').notEmpty().withMessage('Token is required')], validationErrors, revokeToken);
 
 export default router;

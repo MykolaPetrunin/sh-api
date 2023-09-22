@@ -3,9 +3,13 @@ import Product from './Product';
 import RecipeProduct from './RecipeProduct';
 import Token from './Token';
 import User from './User';
+import EmailVerificationToken from './EmailVerificationToken';
 
 User.hasMany(Recipe, { foreignKey: 'user_id', onDelete: 'CASCADE' });
 Recipe.belongsTo(User, { foreignKey: 'user_id' });
+
+User.hasOne(EmailVerificationToken, { foreignKey: 'user_id' });
+EmailVerificationToken.belongsTo(User, { foreignKey: 'user_id' });
 
 User.hasMany(Product, { foreignKey: 'user_id', onDelete: 'CASCADE' });
 Product.belongsTo(User, { foreignKey: 'user_id' });
