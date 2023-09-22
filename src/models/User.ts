@@ -6,8 +6,9 @@ export interface UserAttributes {
   username: string;
   password: string;
   email: string;
-  readonly createdAt?: Date;
-  readonly updatedAt?: Date;
+  is_email_verified: boolean;
+  readonly created_at?: Date;
+  readonly updated_at?: Date;
 }
 
 export interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
@@ -17,8 +18,9 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
   public username!: string;
   public password!: string;
   public email!: string;
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+  public is_email_verified!: boolean;
+  public readonly created_at!: Date;
+  public readonly updated_at!: Date;
 }
 
 User.init(
@@ -40,10 +42,17 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    is_email_verified: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
   },
   {
     tableName: 'users',
     sequelize,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
   },
 );
 

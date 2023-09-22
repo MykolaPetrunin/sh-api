@@ -27,9 +27,26 @@ const swaggerOptions: Options = {
           bearerFormat: 'JWT',
         },
       },
+      schemas: {
+        recipe: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'string',
+            },
+            title: {
+              type: 'string',
+            },
+            description: {
+              type: 'string',
+              required: false,
+            },
+          },
+        },
+      },
     },
   },
-  apis: ['./src/controllers/**/*.ts'],
+  apis: ['./src/routes/**/*.ts'],
 };
 
 export default swaggerOptions;

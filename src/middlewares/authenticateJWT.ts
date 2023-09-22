@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import Token from '../../models/Token';
+import Token from '../models/Token';
 
 export interface AuthRequest extends Request {
   currentUser?: {
@@ -15,7 +15,7 @@ export const authenticateJWT = async (req: AuthRequest, res: Response, next: Nex
   if (token) {
     const tokenInDb = await Token.findOne({
       where: {
-        token: token,
+        token,
       },
     });
 
@@ -27,9 +27,10 @@ export const authenticateJWT = async (req: AuthRequest, res: Response, next: Nex
       if (err) {
         return res.sendStatus(403);
       }
+      const userId = tokenInDb.get('user_id');
       req.currentUser = {
         token: decoded,
-        id: tokenInDb.get('userId'),
+        id: userId,
       };
       next();
     });

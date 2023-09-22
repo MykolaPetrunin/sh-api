@@ -1,40 +1,32 @@
 import { MigrationBuilder } from 'node-pg-migrate';
 
 export async function up(pgm: MigrationBuilder): Promise<void> {
-  pgm.createTable('tokens', {
-    id: {
-      type: 'uuid',
-      primaryKey: true,
-      default: pgm.func('uuid_generate_v4()'),
-    },
+  pgm.createTable('email_verification_tokens', {
     user_id: {
       type: 'uuid',
       notNull: true,
       references: 'users(id)',
-      onDelete: 'CASCADE',
     },
     token: {
       type: 'text',
       notNull: true,
-      unique: true,
     },
     created_at: {
       type: 'timestamp',
       notNull: true,
       default: pgm.func('current_timestamp'),
     },
-    updated_at: {
+    expires_at: {
       type: 'timestamp',
       notNull: true,
-      default: pgm.func('current_timestamp'),
     },
-    user_agent: {
-      type: 'text',
-      notNull: false,
-    },
+  });
+
+  pgm.addConstraint('email_verification_tokens', 'pk_email_verification_tokens', {
+    primaryKey: ['user_id', 'token'],
   });
 }
 
 export async function down(pgm: MigrationBuilder): Promise<void> {
-  pgm.dropTable('tokens');
+  pgm.dropTable('email_verification_tokens');
 }

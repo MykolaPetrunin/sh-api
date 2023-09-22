@@ -1,31 +1,27 @@
 import { MigrationBuilder } from 'node-pg-migrate';
 
 export async function up(pgm: MigrationBuilder): Promise<void> {
-  pgm.createExtension('uuid-ossp', { ifNotExists: true });
+  pgm.createExtension('pg_trgm', { ifNotExists: true });
 
-  pgm.createTable('users', {
+  pgm.createTable('recipes', {
     id: {
       type: 'uuid',
       primaryKey: true,
       default: pgm.func('uuid_generate_v4()'),
     },
-    username: {
-      type: 'text',
+    title: {
+      type: 'varchar(50)',
       notNull: true,
     },
-    password: {
+    description: {
       type: 'text',
-      notNull: true,
+      notNull: false,
     },
-    email: {
-      type: 'text',
+    user_id: {
+      type: 'uuid',
       notNull: true,
-      unique: true,
-    },
-    is_email_verified: {
-      type: 'boolean',
-      notNull: true,
-      default: false,
+      references: 'users(id)',
+      onDelete: 'CASCADE',
     },
     created_at: {
       type: 'timestamp',
@@ -40,11 +36,20 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
   });
 
   pgm.sql(`
-    INSERT INTO users (id, username, password, email)
-    VALUES ('489ed895-fb78-47f5-87e3-764f6137b379', 'SugarHunter', 'password', 'mykola.petrunin@gmail.com');
+    CREATE INDEX idx_recipes_title_gin
+    ON products
+    USING gin (title gin_trgm_ops);
   `);
+
+  pgm.createConstraint('recipes', 'unique_recipe_combination', {
+    unique: ['user_id', 'title'],
+  });
 }
 
 export async function down(pgm: MigrationBuilder): Promise<void> {
-  pgm.dropTable('users');
+  pgm.sql(`
+    DROP INDEX IF EXISTS idx_recipes_title_gin;
+  `);
+  pgm.dropConstraint('recipes', 'unique_recipe_combination');
+  pgm.dropTable('recipes');
 }
