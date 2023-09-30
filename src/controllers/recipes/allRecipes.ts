@@ -39,7 +39,7 @@ export const allRecipes = async (req: AuthRequest, res: Response) => {
       recipes.pop();
     }
 
-    const newCursor = hasNextPage ? recipes[recipes.length - 1].id : null;
+    const newCursor = hasNextPage ? recipes[recipes.length - 1].get('id') : null;
 
     res.status(200).json({
       data: recipes,

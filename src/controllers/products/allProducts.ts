@@ -35,11 +35,12 @@ export const allProducts = async (req: AuthRequest, res: Response) => {
     });
 
     const hasNextPage = products.length > limit;
+
     if (hasNextPage) {
       products.pop();
     }
 
-    const newCursor = hasNextPage ? products[products.length - 1].id : null;
+    const newCursor = hasNextPage ? products[products.length - 1].get('id') : null;
 
     res.status(200).json({
       data: products,
