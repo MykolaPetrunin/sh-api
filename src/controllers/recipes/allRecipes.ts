@@ -11,8 +11,8 @@ export const allRecipes = async (req: AuthRequest, res: Response) => {
   const limit = Number(req.query.limit) || 10;
   const cursor = req.query.cursor;
   const searchText = req.query.search;
-  const sortField = (req.query.sortField as string) || 'created_at';
-  const sortOrder = (req.query.sortOrder as string) || 'DESC';
+  const sortField = 'id';
+  const sortOrder = 'ASC';
 
   try {
     const whereClause: WhereOptions = {};

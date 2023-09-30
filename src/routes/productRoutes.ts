@@ -43,20 +43,6 @@ const router = express.Router();
  *         schema:
  *           type: string
  *           maxLength: 100
- *       - name: sortField
- *         in: query
- *         required: false
- *         description: Field by which to sort the products (allowed fields created_at, title)
- *         schema:
- *           type: string
- *           enum: [created_at, title]
- *       - name: sortOrder
- *         in: query
- *         required: false
- *         description: Order in which to sort the products ('ASC' or 'DESC')
- *         schema:
- *           type: string
- *           enum: [ASC, DESC]
  *     responses:
  *       200:
  *         description: Successfully fetched products
@@ -92,8 +78,6 @@ router.get(
       .isString()
       .isLength({ max: 100 })
       .withMessage('Search text should be a string with a maximum length of 100 characters'),
-    query('sortField').optional().isIn(['created_at', 'title']).withMessage('Invalid sort field. Allowed fields are "created_at" and "title"'),
-    query('sortOrder').optional().isIn(['ASC', 'DESC']).withMessage('Invalid sort order. Allowed orders are "ASC" and "DESC"'),
   ],
   validationErrors,
   allProducts,
