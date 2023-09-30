@@ -40,20 +40,6 @@ const router = express.Router();
  *         description: Full-text search query. Must be a string.
  *         schema:
  *           type: string
- *       - name: sortField
- *         in: query
- *         required: false
- *         description: Field by which to sort the recipes. Allowed values are 'created_at', 'title'.
- *         schema:
- *           type: string
- *           enum: [created_at, title]
- *       - name: sortOrder
- *         in: query
- *         required: false
- *         description: Order in which to sort the recipes. Allowed values are 'ASC' or 'DESC'.
- *         schema:
- *           type: string
- *           enum: [ASC, DESC]
  *     responses:
  *       200:
  *         description: Successfully fetched recipes
@@ -92,8 +78,6 @@ router.get(
     query('limit').optional().isInt({ min: 1 }).withMessage('Limit must be an integer greater than 0').toInt(),
     query('cursor').optional().isString().withMessage('Cursor must be a string'),
     query('search').optional().isString().withMessage('Search must be a string').trim(),
-    query('sortField').optional().isIn(['created_at', 'title']).withMessage('Invalid sort field'),
-    query('sortOrder').optional().isIn(['ASC', 'DESC']).withMessage('Sort order must be either ASC or DESC'),
   ],
   validationErrors,
   allRecipes,
