@@ -12,7 +12,6 @@ export const createProductFromRecipe = async (req: AuthRequest, res: Response) =
   }
 
   try {
-    // Знаходимо рецепт
     const recipe = await Recipe.findOne({
       where: { id: recipeId, user_id: userId },
       include: [
@@ -28,13 +27,11 @@ export const createProductFromRecipe = async (req: AuthRequest, res: Response) =
       return res.status(404).json({ error: 'Recipe not found' });
     }
 
-    // Ініціалізація змінних
     let totalProteins = 0;
     let totalFats = 0;
     let totalCarbs = 0;
     let totalQuantity = 0;
 
-    // Розрахунок макронутрієнтів
     const products = recipe.get('products')!;
     for (const product of products) {
       const recipeProduct = product.get('RecipeProduct')!;
@@ -45,12 +42,10 @@ export const createProductFromRecipe = async (req: AuthRequest, res: Response) =
       totalCarbs += product.get('carbohydrates') * factor;
     }
 
-    // Розрахунок на 100 грам
     const proteinsPer100g = (totalProteins / totalQuantity) * 100;
     const fatsPer100g = (totalFats / totalQuantity) * 100;
     const carbsPer100g = (totalCarbs / totalQuantity) * 100;
 
-    // Створюємо новий продукт
     const newProduct = await Product.create({
       title,
       description,

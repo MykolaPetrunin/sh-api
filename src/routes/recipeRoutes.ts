@@ -85,7 +85,7 @@ router.get(
 
 /**
  * @swagger
- * /api/recipes/create:
+ * /api/recipes:
  *  post:
  *     security:
  *       - bearerAuth: []
@@ -129,7 +129,7 @@ router.get(
  *         description: Internal Server Error
  */
 router.post(
-  '/create',
+  '/',
   authenticateJWT,
   [
     check('title').notEmpty().withMessage('Title is required'),

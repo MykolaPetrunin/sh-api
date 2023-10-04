@@ -85,7 +85,7 @@ router.get(
 
 /**
  * @swagger
- * /api/products/create:
+ * /api/products:
  *   post:
  *     security:
  *       - bearerAuth: []
@@ -140,7 +140,7 @@ router.get(
  *         description: Error creating product
  */
 router.post(
-  '/create',
+  '/',
   authenticateJWT,
   [
     check('proteins').isFloat({ min: 0 }).withMessage('Proteins must be a positive number'),
