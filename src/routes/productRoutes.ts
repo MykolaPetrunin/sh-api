@@ -335,8 +335,7 @@ router.post(
   [
     body('recipeId').notEmpty().withMessage('recipeId is required'),
     body('title').notEmpty().withMessage('title is required').isString().withMessage('title must be a string'),
-    body('description').optional().isString().withMessage('description must be a string'), // Ось воно
-    // Add more validation rules here
+    body('description').optional().isString().withMessage('description must be a string'),
   ],
   createProductFromRecipe,
 );

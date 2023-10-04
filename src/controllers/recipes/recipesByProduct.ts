@@ -1,7 +1,7 @@
 import { AuthRequest } from '../../middlewares/authenticateJWT';
 import Recipe from '../../models/Recipe';
 import Product from '../../models/Product';
-import RecipeProduct from '../../models/RecipeProduct'; // Assuming you have a junction table
+import RecipeProduct from '../../models/RecipeProduct';
 import { Response } from 'express';
 import { Op } from 'sequelize';
 
