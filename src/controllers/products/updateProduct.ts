@@ -7,10 +7,8 @@ export const updateProduct = async (req: AuthRequest, res: Response) => {
   const userId = req.currentUser?.id;
   const productId = req.params.productId;
 
-  // Restrict the fields that can be updated
   const { proteins, carbohydrates, fats, title, barcode, description } = req.body;
 
-  // Filter out undefined fields before updating
   const validFields = { proteins, carbohydrates, fats, title, barcode, description };
   const fieldsToUpdate = Object.fromEntries(Object.entries(validFields).filter(([, value]) => value !== undefined));
 

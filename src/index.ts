@@ -41,7 +41,7 @@ app.use(express.json());
 sequelize
   .sync()
   .then(() => {
-    logger.info('DB Synced'); // Використовуємо логгер замість console.log
+    logger.info('DB Synced');
 
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
@@ -58,11 +58,11 @@ sequelize
     app.use('/api/recipes', recipeRoutes);
 
     app.listen(port, () => {
-      logger.info(`Server running on http://localhost:${port}/`); // Використовуємо логгер замість console.log
+      logger.info(`Server running on http://localhost:${port}/`);
     });
   })
   .catch((error) => {
-    logger.error(`Error syncing database: ${error}`); // Використовуємо логгер замість console.error
+    logger.error(`Error syncing database: ${error}`);
   });
 
 cron.schedule('0 0 * * *', removeExpiredTokens);
