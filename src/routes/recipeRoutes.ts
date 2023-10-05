@@ -182,6 +182,8 @@ router.post(
  *                   items:
  *                     type: object
  *                     properties:
+ *                       id:
+ *                         type: string
  *                       title:
  *                         type: string
  *                       proteins:
