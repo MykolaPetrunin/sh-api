@@ -5,7 +5,7 @@ import Recipe from '../../models/Recipe';
 
 export const createProductFromRecipe = async (req: AuthRequest, res: Response) => {
   const userId = req.currentUser?.id;
-  const { recipeId, title, description } = req.body;
+  const { recipeId, title, description, totalWeight } = req.body;
 
   if (!userId || !recipeId || !title) {
     return res.status(400).json({ error: 'Missing required fields' });
@@ -41,6 +41,8 @@ export const createProductFromRecipe = async (req: AuthRequest, res: Response) =
       totalFats += product.get('fats') * factor;
       totalCarbs += product.get('carbohydrates') * factor;
     }
+
+    if (totalWeight) totalQuantity = totalWeight;
 
     const proteinsPer100g = (totalProteins / totalQuantity) * 100;
     const fatsPer100g = (totalFats / totalQuantity) * 100;
