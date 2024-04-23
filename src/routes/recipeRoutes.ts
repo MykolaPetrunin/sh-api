@@ -182,6 +182,8 @@ router.post(
  *                   items:
  *                     type: object
  *                     properties:
+ *                       id:
+ *                         type: string
  *                       title:
  *                         type: string
  *                       proteins:
@@ -228,7 +230,7 @@ router.get(
 
 /**
  * @swagger
- * /api/recipes/{recipe_id}:
+ * /api/recipes/{recipeId}:
  *  patch:
  *     security:
  *       - bearerAuth: []
@@ -236,7 +238,7 @@ router.get(
  *     tags:
  *       - Recipes
  *     parameters:
- *       - name: recipe_id
+ *       - name: recipeId
  *         in: path
  *         required: true
  *         description: ID of the recipe to update
@@ -275,7 +277,7 @@ router.get(
  *       500:
  *         description: Internal Server Error
  */
-router.post(
+router.patch(
   '/:recipeId',
   authenticateJWT,
   [

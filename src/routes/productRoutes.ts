@@ -302,6 +302,9 @@ router.delete('/:productId', authenticateJWT, [param('productId').isUUID().withM
  *                 type: string
  *                 description: The description of the new product
  *                 example: "This is a new product based on a recipe."
+ *               totalWeight:
+ *                 type: number
+ *                 description: Total recipe weight
  *     responses:
  *       201:
  *         description: Product successfully created

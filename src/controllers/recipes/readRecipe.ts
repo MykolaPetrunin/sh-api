@@ -13,7 +13,7 @@ export const readRecipe = async (req: Request, res: Response) => {
         {
           model: Product,
           as: 'products',
-          attributes: ['title', 'proteins', 'carbohydrates', 'fats'],
+          attributes: ['id', 'title', 'proteins', 'carbohydrates', 'fats'],
           through: {
             attributes: ['quantity'],
             as: 'product_info',

@@ -7,7 +7,7 @@ import RecipeProduct from '../../models/RecipeProduct';
 
 export const updateRecipe = async (req: AuthRequest, res: Response) => {
   const user_id = req.currentUser?.id;
-  const { recipe_id } = req.params;
+  const { recipeId } = req.params;
   const { title, products } = req.body;
 
   if (!user_id) {
@@ -21,7 +21,7 @@ export const updateRecipe = async (req: AuthRequest, res: Response) => {
       const updatedRecipe = await Recipe.update(
         { title },
         {
-          where: { id: recipe_id, user_id },
+          where: { id: recipeId, user_id },
           transaction,
         },
       );
@@ -33,10 +33,10 @@ export const updateRecipe = async (req: AuthRequest, res: Response) => {
     }
 
     if (products && Array.isArray(products)) {
-      await RecipeProduct.destroy({ where: { recipe_id }, transaction });
+      await RecipeProduct.destroy({ where: { recipe_id: recipeId }, transaction });
 
       const recipeProducts = products.map((product) => ({
-        recipe_id,
+        recipe_id: recipeId,
         product_id: product.product_id,
         quantity: product.quantity,
       }));
@@ -46,7 +46,7 @@ export const updateRecipe = async (req: AuthRequest, res: Response) => {
 
     await transaction.commit();
 
-    logger.info(`Recipe updated with id ${recipe_id}`);
+    logger.info(`Recipe updated with id ${recipeId}`);
     return res.status(200).json({ message: 'Recipe updated successfully' });
   } catch (error) {
     await transaction.rollback();
