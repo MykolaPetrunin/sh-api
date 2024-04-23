@@ -13,7 +13,7 @@ export const createProductFromRecipe = async (req: AuthRequest, res: Response) =
 
   try {
     const recipe = await Recipe.findOne({
-      where: { id: recipeId, user_id: userId },
+      where: { id: recipeId },
       include: [
         {
           model: Product,
@@ -24,7 +24,7 @@ export const createProductFromRecipe = async (req: AuthRequest, res: Response) =
     });
 
     if (!recipe) {
-      return res.status(404).json({ error: 'Recipe not found' });
+      return res.status(404).json({ error: 'Recipe not found or not owned by user' });
     }
 
     let totalProteins = 0;
