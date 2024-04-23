@@ -69,6 +69,8 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "@emotion/cache": "^11.11.0",
+    "@mui/material-nextjs": "^5.15.11",
     "@types/node": "^20.6.1",
     "@types/node-cron": "^3.0.8",
     "bcrypt": "^5.1.1",
